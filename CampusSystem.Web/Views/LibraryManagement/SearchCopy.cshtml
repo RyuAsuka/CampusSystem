@@ -1,0 +1,52 @@
+﻿@model CampusSystem.Web.Models.BookManagement
+
+@{
+    string copyId = ViewBag.CopyId;
+    string userId = ViewBag.UserId;
+}
+
+@if (Model == null)
+{
+    <p>@ViewBag.Error</p>
+}
+else
+{
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt></dt>
+            <dd>@Html.HiddenFor(m => m.CopyId)</dd>
+            <dt></dt>
+            <dd>@Html.HiddenFor(m => m.UserId)</dd>
+            <dt>
+                @Html.DisplayName("书名")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.BookName)
+            </dd>
+
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ISBN)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ISBN)
+            </dd>
+
+            <dt>
+                @Html.DisplayName("索书号")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Index)
+            </dd>
+        </dl>
+    </div>
+    <p>
+        @*@Html.ActionLink("借阅本书", "ConfirmLend", "LibraryManagement", new { copyId = copyId, userId = userId}, new { @class = "btn btn-warning" })*@
+        <a href="@Url.Content("~/LibraryManagement/ConfirmLend?copyId="+copyId+"&userId="+userId)" class="btn btn-warning">借阅本书</a>        |
+        @Html.ActionLink("返回", "Index", null, new { @class = "btn btn-default" })
+    </p>
+}

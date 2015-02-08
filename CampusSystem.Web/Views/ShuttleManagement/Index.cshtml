@@ -1,0 +1,73 @@
+﻿@model IEnumerable<CampusSystem.Web.Models.ShuttleManagementInfoModel>
+
+@{
+    ViewBag.Title = "校车班次管理";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.SubTitle = "校车班次管理";
+    ViewBag.SubSubtitle = "校园信息即时交互系统";
+}
+
+<div class="container">
+    <p>
+        @Html.ActionLink("创建新的校车班次", "Create", null, new Dictionary<string, object>() { {"class","btn btn-primary"} })
+    </p>
+    <table class="table table-bordered table-striped table-responsive">
+        <tr>
+            <th>
+                @Html.DisplayName("ID")
+            </th>
+            <th>
+                @Html.DisplayName("时间")
+            </th>
+            <th>
+                @Html.DisplayName("起点")
+            </th>
+            <th>
+                @Html.DisplayName("终点")
+            </th>
+            <th>
+                @Html.DisplayName("星期")
+            </th>
+            <th>
+                @Html.DisplayName("操作")
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShuttleId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Time)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartLocation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndLocation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Weekdays)
+                </td>
+                <td>
+                    @Html.ActionLink("编辑", "Edit", new { id = item.ShuttleId }, new { @class = "btn btn-info"}) |
+                    @Html.ActionLink("删除", "Delete", new { id = item.ShuttleId }, new { @class = "btn btn-danger", title = "delete", id = item.ShuttleId })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+<script>
+    $(document).ready(function () {
+        $("[title='delete']").click(function () {
+            var id = $(this)[0].id;
+            if(confirm("确定要删除编号为"+ id +"的校车班次信息吗？"))
+            {
+                window.location.href = "@Url.Content("~/ShuttleManagement/Delete/")" + id;
+            }
+        });
+    });
+</script>

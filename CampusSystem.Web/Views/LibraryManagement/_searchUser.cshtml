@@ -1,0 +1,67 @@
+﻿@model IEnumerable<CampusSystem.Web.Models.BookManagement>
+
+<p>
+    @Html.ActionLink("图书借阅", "BookLend", new { userId = ViewBag.UserId})
+</p>
+<table class="table table-bordered table-responsive">
+    <tr>
+        <th>
+            @Html.DisplayName("复本ID")
+        </th>
+        <th>
+            @Html.DisplayName("书名")
+        </th>
+        <th>
+            @Html.DisplayName("学号/工号")
+        </th>
+        <th>
+            @Html.DisplayName("ISBN")
+        </th>
+        <th>
+            @Html.DisplayName("索书号")
+        </th>
+        <th>
+            @Html.DisplayName("借出时间")
+        </th>
+        <th>
+            @Html.DisplayName("到期时间")
+        </th>
+        <th>
+            @Html.DisplayName("还书时间")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CopyId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BookName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ISBN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Index)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LendTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExpireTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReturnTime)
+        </td>
+        <td>
+            @Html.ActionLink("还书", "ReturnBook", new { id = item.Id }, new { @class = "btn btn-default" })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,25 @@
+﻿@model CampusSystem.Web.Models.UserModel
+
+@{
+    ViewBag.Title = "图书借阅管理";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.SubTitle = "图书借阅管理";
+    ViewBag.SubSubtitle = "校园信息即时交互系统";
+}
+
+<div class="container">
+    @using (Ajax.BeginForm("SearchUser", new AjaxOptions()
+    {
+        HttpMethod = "GET",
+        UpdateTargetId = "searchingResults",
+        InsertionMode = InsertionMode.Replace
+    }))
+    {
+        <div class="form-group">
+            <label>请输入学号/工号：@Html.TextBoxFor(m => m.UserId, new { @class = "form-control", style = "width: auto" })</label>
+            <label><button class="btn btn-primary" type="submit" id="search">查询</button></label>
+        </div>
+    }
+
+    <div id="searchingResults"></div>
+</div>

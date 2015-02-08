@@ -1,0 +1,102 @@
+﻿@{
+    string userName = ViewBag.UserName;
+    string userRole = ViewBag.UserRole;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <script src="~/Scripts/jquery-1.8.0.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <link href="~/Contents/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="@Url.Content("~/Home/Index")">校园信息即时交互系统</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    @if (userRole == "student" || userRole == "teacher" || userRole == "admin")
+                    {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">消息 <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>@Html.ActionLink("消息发送", "SendMessage", "Message")</li>
+                                <li>@Html.ActionLink("消息接收", "ReceiveMessage", "Message")</li>
+                            </ul>
+                        </li>
+                    }
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">查询 <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="@Url.Content("~/Shuttle/")">校车查询</a></li>
+                            @if (userRole == "student")
+                            {
+                                <li><a href="@Url.Content("~/Schedule/Score")">成绩查询</a></li>
+                            }
+
+                            @if (userRole == "teacher")
+                            {
+                                <li><a href="@Url.Content("~/Schedule/EditScores")">成绩登记</a></li>
+                            }
+                            @if (userRole == "student" || userRole == "teacher")
+                            {
+                                <li><a href="@Url.Content("~/Library/")">图书借阅查询</a></li>
+                                <li><a href="@Url.Content("~/Schedule/")">课程表查询</a></li>
+                            }
+                        </ul>
+
+                    </li>
+                    @if (userRole == "admin")
+                    {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">管理 <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="@Url.Content("~/ShuttleManagement/")">校车信息管理</a></li>
+                                <li><a href="#">图书借阅管理</a></li>
+                            </ul>
+
+                        </li>
+                    }
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <ul id="username" class="nav navbar-nav navbar-right"></ul>
+                        <script type="text/javascript">
+                            $(function () {
+                                $("#username").load("/Common/UserName");
+                            });
+                        </script>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    <div class="jumbotron" style="background-color:#0090e0; color:#ffffff; padding-top:78px; width:100%;">
+        <div class="container">
+            <h3 style="font-family: 微软雅黑;">@ViewBag.SubSubtitle</h3>
+            <h1 style="font-family: 微软雅黑;">@ViewBag.SubTitle</h1>
+        </div>
+    </div>
+    @RenderBody()
+    <div class="container">
+        <hr />
+        <footer id="footer">
+            <p>@@Copyright 2014 Mao Jiewen | Zhan Hongjian | Zhu Lei | Zhang Le, All copyrights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>

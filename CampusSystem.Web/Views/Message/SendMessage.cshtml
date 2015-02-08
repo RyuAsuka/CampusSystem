@@ -1,0 +1,41 @@
+﻿@model CampusSystem.Web.Models.Message
+
+@{
+    ViewBag.Title = "发送消息";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<CampusSystem.Data.Models.User> friends = ViewBag.Friends.FriendList;
+    ViewBag.SubTitle = "消息发送";
+    ViewBag.SubSubtitle = "校园信息即时交互系统";
+}
+
+<div class="container">
+    @using (Html.BeginForm("SendMessage", "Message", FormMethod.Post, new { name = "form1", role = "form" }))
+    {
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-2">
+                <h3>发送到：</h3>
+                <div class="form-group">
+                    @foreach (var f in friends)
+                    {
+                        <label>
+                            @Html.CheckBox(f.user_id)
+                            @Html.DisplayName(f.name)
+                        </label>
+                        <br />
+                    }
+                </div>
+            </div>
+            <div class="col-md-2">
+                @Html.TextAreaFor(m => m.MessageContent, new { id = "messageContent", @class = "form-control", style = "width:500px; height: 350px;", placeholder = "输入你想要发送的内容" })<br />
+                <button type="submit" class="btn btn-primary">发送</button>@ViewBag.ReturnMessage
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    }
+</div>
+<script>
+    $(document).ready(function () {
+        document.getElementById("messageContent").value = "";
+    });
+</script>

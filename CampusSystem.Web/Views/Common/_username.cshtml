@@ -1,0 +1,18 @@
+﻿@{
+    string username = ViewBag.UserName;
+}
+
+    @if (ViewBag.UserName == null || string.IsNullOrEmpty(ViewBag.UserName))
+    {
+        <li>@Html.ActionLink("登录", "Login", "Account")</li>
+    }
+    else
+    {
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">欢迎，@username<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li>@Html.ActionLink("注销", "Logout", "Account")</li>
+            </ul>
+        </li>
+    }
+<input type="hidden" value="@ViewBag.userId" id="hiddenField"/>

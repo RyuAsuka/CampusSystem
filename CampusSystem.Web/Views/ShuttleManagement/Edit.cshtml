@@ -1,0 +1,142 @@
+﻿@model CampusSystem.Web.Models.ShuttleManagementInfoModel
+
+@{
+    ViewBag.Title = "修改校车信息";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.SubTitle = "修改校车班次";
+    ViewBag.SubSubtitle = "校园信息即时交互系统";
+}
+
+<div class="container">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <hr />
+            <div>@ViewBag.ErrorMessage</div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                        @Html.HiddenFor(model => model.ShuttleId, new { htmlAttributes = new { @class = "form-control" , style = "width:auto"} })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Time, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Time, new { htmlAttributes = new { @class = "form-control", style = "width:auto" } })
+                    @Html.ValidationMessageFor(model => model.Time, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.StartLocation, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.StartLocation, new List<SelectListItem> {
+                       new SelectListItem { Value = "中山北路校区" , Text = "中山北路校区" },
+                       new SelectListItem { Value = "金沙江路" , Text = "金沙江路" },
+                       new SelectListItem { Value = "闵行校区" , Text = "闵行校区" },
+                       new SelectListItem { Value = "上海南站" , Text = "上海南站" },
+                       new SelectListItem { Value = "东川路地铁站" , Text = "东川路地铁站" }
+                    }, "起点站", new Dictionary<string, object>() { { "class", "form-control" }, { "style", "width:auto" } })
+                    @Html.ValidationMessageFor(model => model.StartLocation, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.EndLocation, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.EndLocation, new List<SelectListItem> {
+                       new SelectListItem { Value = "中山北路校区" , Text = "中山北路校区" },
+                       new SelectListItem { Value = "金沙江路" , Text = "金沙江路" },
+                       new SelectListItem { Value = "闵行校区" , Text = "闵行校区" },
+                       new SelectListItem { Value = "上海南站" , Text = "上海南站" },
+                       new SelectListItem { Value = "东川路地铁站" , Text = "东川路地铁站" }
+                    }, "终点站", new Dictionary<string, object>() { { "class", "form-control" }, { "style", "width:auto" } })
+                    @Html.ValidationMessageFor(model => model.EndLocation, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Weekdays, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.CheckBox("sun", false, new { id = "check0", title = "日" })
+                    @Html.DisplayName("周日")
+                    @Html.CheckBox("mon", false, new { id = "check1", title = "一" })
+                    @Html.DisplayName("周一")
+                    @Html.CheckBox("tue", false, new { id = "check2", title = "二" })
+                    @Html.DisplayName("周二")
+                    @Html.CheckBox("wed", false, new { id = "check3", title = "三" })
+                    @Html.DisplayName("周三")
+                    @Html.CheckBox("thu", false, new { id = "check4", title = "四" })
+                    @Html.DisplayName("周四")
+                    @Html.CheckBox("fri", false, new { id = "check5", title = "五" })
+                    @Html.DisplayName("周五")
+                    @Html.CheckBox("sat", false, new { id = "check6", title = "六" })
+                    @Html.DisplayName("周六")
+
+                    @Html.HiddenFor(m => m.Weekdays, new { id = "weekdayString" });
+                    @Html.ValidationMessageFor(model => model.Weekdays, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="保存" class="btn btn-primary" onclick="JoinWeekdays()"/>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("返回", "Index", null, new { @class = "btn btn-primary"})
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var ws = $("#weekdayString").val();
+        for(var i = 0; i < ws.length; i++)
+        {
+            switch(ws[i])
+            {
+                case '日':
+                    $("#check0")[0].checked = true;
+                    break;
+                case '一':
+                    $("#check1")[0].checked = true;
+                    break;
+                case '二':
+                    $("#check2")[0].checked = true;
+                    break;
+                case '三':
+                    $("#check3")[0].checked = true;
+                    break;
+                case '四':
+                    $("#check4")[0].checked = true;
+                    break;
+                case '五':
+                    $("#check5")[0].checked = true;
+                    break;
+                case '六':
+                    $("#check6")[0].checked = true;
+                    break;
+            }
+        }
+    });
+
+    function JoinWeekdays() {
+        var ws = "";
+        for (var i = 0; i <= 6; i++) {
+            if ($("#check" + i)[0].checked == true)
+                ws += $("#check" + i).attr("title");
+        }
+        $("#weekdayString").val(ws);
+        //alert($("#weekdayString").val());
+    }
+</script>

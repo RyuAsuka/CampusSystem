@@ -1,0 +1,26 @@
+﻿@model List<CampusSystem.Web.Models.CourseViewModel>
+
+<table class="table table-bordered">
+    <tr>
+        <td>课程ID</td>
+        <td>课程名称</td>
+        <td>教师</td>
+        <td>学分</td>
+        <td>考试时间</td>
+        <td>上课地点</td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.CourseId</td>
+            <td>@item.CourseName</td>
+            <td>@item.Teacher</td>
+            <td>@item.Creadits</td>
+            <td>@item.ExamTime</td>
+            <td>@item.Place</td>
+        </tr>
+    }
+</table>
+
+
+

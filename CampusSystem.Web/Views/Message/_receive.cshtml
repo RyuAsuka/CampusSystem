@@ -1,0 +1,13 @@
+﻿@model List<CampusSystem.Web.Models.Message>
+
+@foreach(var item in Model)
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">@item.Sender @item.SendTime.ToString("yyyy-MM-dd HH:mm:ss")</h3>
+        </div>
+        <div class="panel-body">
+            <p>@item.MessageContent</p>
+        </div>
+    </div>
+}

@@ -1,0 +1,27 @@
+﻿@model CampusSystem.Web.Models.BookManagement
+
+@{
+    ViewBag.Title = "图书借阅";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string userId = ViewBag.UserId;
+    ViewBag.SubTitle = "图书借阅管理";
+    ViewBag.SubSubtitle = "校园信息即时交互系统";
+}
+
+<div class="container">
+    @using (Ajax.BeginForm("SearchCopy", new AjaxOptions()
+    {
+        HttpMethod = "GET",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "search"
+    }))
+    {
+        <div class="form-group">
+            <label>输入条形码：@Html.TextBoxFor(m => m.CopyId, new { @class = "form-control", style = "width:auto" })</label>
+            <label>@Html.HiddenFor(m => m.UserId)</label>
+            <label><button type="submit" id="submit" class="btn btn-primary">查询</button></label>
+
+        </div>
+    }
+    <div id="search"></div>
+</div>

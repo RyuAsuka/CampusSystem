@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int id = ViewBag.Id;
+}
+
+<script>
+    $(document).ready(function () {
+        var id = @id;
+        alert("删除编号为"+id+"的校车班次信息成功！");
+        window.location.href = "@Url.Content("~/ShuttleManagement/")";
+    });
+</script>
+

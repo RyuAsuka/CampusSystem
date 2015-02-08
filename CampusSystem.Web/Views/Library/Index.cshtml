@@ -1,0 +1,56 @@
+﻿@model List<CampusSystem.Web.Models.BooksLent>
+
+@{
+    ViewBag.Title = "图书借阅";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.SubTitle = "我的图书借阅查询";
+    ViewBag.SubSubtitle = "校园信息即时交互系统";
+}
+
+<div class="container">
+    @using (Html.BeginForm(null, null, FormMethod.Post, new Dictionary<string, object>()
+    {
+        {"name","libraryForm"}
+    }))
+    {
+        <table class="table" id="lentList">
+            <tr>
+                <td></td>
+                <td>书　　名</td>
+                <td>借书日期</td>
+                <td>到期日期</td>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.CheckBox("checkitem", new { value = item.LentId})</td>
+                    <td>@item.BookName</td>
+                    <td>@item.BorrowTime</td>
+                    <td>@item.ExpireTime</td>
+                </tr>
+            }
+
+        </table>
+        <button type="button" id="continueAll">全部续借</button>
+        <button type="button" id="continueChecked">续借已选</button>
+    }
+</div>
+<script>
+    $(function () {
+        $("#continueAll").click(function () {
+            if (confirm("确定要全部续借吗？")) {
+                document.libraryForm.action = "@Url.Content("~/Library/ContinueAll")";
+                document.libraryForm.submit();
+                alert("全部续借成功！");
+            }
+        });
+    });
+
+    $(function () {
+        $("#continueChecked").click(function () {
+            document.libraryForm.action = "@Url.Content("~/Library/ContinueChecked")";
+            document.libraryForm.submit();
+            alert("续借已选成功！");
+        });
+    });
+</script>

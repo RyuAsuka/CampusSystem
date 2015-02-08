@@ -1,0 +1,58 @@
+﻿@model CampusSystem.Web.Models.ShuttleSearch
+
+@{
+    ViewBag.Title = "校车查询";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.SubTitle = "校车信息查询";
+    ViewBag.SubSubtitle = "校园信息即时交互系统";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-6">
+
+            @using (Ajax.BeginForm("Search", "Shuttle", null, new AjaxOptions
+    {
+        UpdateTargetId = "result",
+        InsertionMode = InsertionMode.Replace,
+        HttpMethod = "GET"
+    }, new Dictionary<string, object>() { {"class","form-inline"}}))
+            {
+                <label class="sr-only"></label>
+                @Html.DropDownListFor(m => m.Weekday, new List<SelectListItem> {
+                       new SelectListItem { Value = "日" , Text = "周日" },
+                       new SelectListItem { Value = "一" , Text = "周一" },
+                       new SelectListItem { Value = "二" , Text = "周二" },
+                       new SelectListItem { Value = "三" , Text = "周三" },
+                       new SelectListItem { Value = "四" , Text = "周四" },
+                       new SelectListItem { Value = "五" , Text = "周五" },
+                       new SelectListItem { Value = "六" , Text = "周六" }
+                    }, "星期", new Dictionary<string, object>() { { "class", "form-control" }, { "style", "width:auto" } })
+                <label class="sr-only"></label>
+                @Html.DropDownListFor(m => m.StartLocation, new List<SelectListItem> {
+                       new SelectListItem { Value = "中山北路校区" , Text = "中山北路校区" },
+                       new SelectListItem { Value = "金沙江路" , Text = "金沙江路" },
+                       new SelectListItem { Value = "闵行校区" , Text = "闵行校区" },
+                       new SelectListItem { Value = "上海南站" , Text = "上海南站" },
+                       new SelectListItem { Value = "东川路地铁站" , Text = "东川路地铁站" }
+                    }, "起点站", new Dictionary<string, object>() { { "class", "form-control" }, { "style", "width:auto" } })
+                <label class="sr-only"></label>
+                @Html.DropDownListFor(m => m.EndLocation, new List<SelectListItem> {
+                       new SelectListItem { Value = "中山北路校区" , Text = "中山北路校区" },
+                       new SelectListItem { Value = "金沙江路" , Text = "金沙江路" },
+                       new SelectListItem { Value = "闵行校区" , Text = "闵行校区" },
+                       new SelectListItem { Value = "上海南站" , Text = "上海南站" },
+                       new SelectListItem { Value = "东川路地铁站" , Text = "东川路地铁站" }
+                    }, "终点站", new Dictionary<string, object>() { { "class", "form-control" }, { "style", "width:auto" } })
+                <label class="sr-only"></label>
+                <button type="submit" id="search" class="btn btn-primary">查询！</button>
+            }
+            <br />
+            <div id="result"></div>
+
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+
+</div>

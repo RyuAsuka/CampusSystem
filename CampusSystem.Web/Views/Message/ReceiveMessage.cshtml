@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "消息接收";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.SubTitle = "消息接收";
+    ViewBag.SubSubtitle = "校园信息即时交互系统";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8" id="center">
+
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#center").load("@Url.Content("~/Message/ReceiveAsync")");
+        setInterval(function () {
+            $("#center").load("@Url.Content("~/Message/ReceiveAsync")");
+        }, 5000);
+    });
+</script>

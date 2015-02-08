@@ -1,0 +1,26 @@
+﻿@model List<CampusSystem.Web.Models.ScoreViewModel>
+
+@{
+    ViewBag.Title = "成绩查询";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.SubTitle = "成绩查询";
+    ViewBag.SubSubtitle = "校园信息即时交互系统";
+}
+
+<div class="container">
+    <div id="showScores">
+        <table class="table table-bordered">
+            <tr>
+                <td>@Html.ActionLink("课程名称", "Score", new { order = "name" })</td>
+                <td>@Html.ActionLink("成绩", "Score", new { order = "score" })</td>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.CourseName</td>
+                    <td>@item.Score</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

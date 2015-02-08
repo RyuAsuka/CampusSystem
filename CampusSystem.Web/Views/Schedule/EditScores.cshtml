@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "成绩记录";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<SelectListItem> list = (List<SelectListItem>)ViewBag.SelectList;
+    ViewBag.SubTitle = "成绩登记";
+    ViewBag.SubSubtitle = "校园信息即时交互系统";
+}
+
+<div class="container">
+    @Html.DropDownList("courses", list, "请选择任教的课程", new Dictionary<string, object>()
+            {
+                {"class","form-control"},
+                {"id","courseList"}
+            })
+
+    <div id="scoreList"></div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#courseList").change(function () {
+            var courseName = $("#courseList").val();
+            $("#scoreList").load("@Url.Content("~/Schedule/showScores?courseName=")" + courseName);
+        });
+    });
+</script>

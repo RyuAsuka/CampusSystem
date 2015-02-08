@@ -1,0 +1,138 @@
+﻿@{
+    ViewBag.Title = "首页";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string role = ViewBag.UserRole;
+    ViewBag.SubTitle = "校园即时交互系统";
+}
+
+<div class="container">
+    <!--未登录状态也可使用的功能-->
+    <div class="row">
+        <div class="col-md-3">
+            <div style="width:180px; height:180px; border:0">
+                <a href="http://www.ecnu.edu.cn/tzgg/list.htm"><img src="~/imgaes/news.png" alt="新闻公告"></a>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div style="width:180px; height:180px; border:0">
+                <a href="@Url.Content("~/Shuttle/Index")"><img src="~/imgaes/shuttle.png" alt="校车查询"></a>
+            </div>
+            <!--<h2>@Html.ActionLink("校车查询", "Index", "Shuttle")</h2>-->
+        </div>
+        <div class="col-md-3">
+            <div style="width:180px; height:180px; border:0">
+                <a href="@Url.Content("~/Downloads/campus_system.apk")"><img src="~/imgaes/android.png" alt="安卓客户端下载"></a>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div style="width:180px; height:180px; border:0">
+                <a href="#" id="ios"><img src="~/imgaes/ios.png" width="180" height="180" alt="iOS客户端下载"></a>
+            </div>
+        </div>
+    </div>
+    @if (role != null && role != "")
+    {
+    <!--登录状态下共通功能-->
+        <div class="row">
+            <div class="col-md-3">
+                <div style="width:180px; height:180px; border:0">
+                    <a href="@Url.Content("~/Message/SendMessage")"><img src="~/imgaes/message_send.png" alt="消息发送" /></a>
+                </div>
+                <!--<h2>@Html.ActionLink("消息发送","SendMessage","Message")</h2>-->
+            </div>
+            <div class="col-md-3">
+                <div style="width:180px; height:180px; border:0">
+                    <a href="@Url.Content("~/Message/ReceiveMessage")"><img src="~/imgaes/message_receiving.png" alt="消息接收" /></a>
+                </div>
+                <!--<h2>@Html.ActionLink("消息接收","ReceiveMessage","Message")</h2>-->
+            </div>
+            @if (role == "student" || role == "teacher")
+            {
+                <div class="col-md-3">
+                    <div style="width:180px; height:180px; border:0">
+                        <a href="@Url.Content("~/Library/Index")"><img src="~/imgaes/library.png" alt="图书借阅查询" /></a>
+                    </div>
+                    <!--<h2>@Html.ActionLink("图书借阅记录", "Index", "Library", null, null)</h2>-->
+                </div>
+                <div class="col-md-3">
+                    <div style="width:180px; height:180px; border:0">
+                        <a href="@Url.Content("~/Schedule/Index")"><img src="~/imgaes/schedule.png" alt="课程表查询" /></a>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    @if (role == "student")
+    {
+    <!--学生角色特有功能-->
+        <div class="row">
+            <div class="col-md-3">
+                <div style="width:180px; height:180px; border:0">
+                    <a href="@Url.Content("~/Schedule/Score?order=null")"><img src="~/imgaes/chengji.png" alt="成绩查询" /></a>
+                </div>
+                <!--<h2>@Html.ActionLink("成绩查询", "Score", "Schedule", new { order = "null" }, null)</h2>-->
+            </div>
+            <div class="col-md-3">
+                <h2></h2>
+            </div>
+            <div class="col-md-3">
+                <h2></h2>
+            </div>
+            <div class="col-md-3">
+                <h2></h2>
+            </div>
+        </div>
+    }
+    @if (role == "teacher")
+    {
+    <!--教师角色特有功能-->
+        <div class="row">
+            <div class="col-md-3">
+                <div style="width:180px; height:180px; border:0">
+                    <a href="@Url.Content("~/Schedule/EditScores")"><img src="~/imgaes/chengjijilu.png" alt="成绩记录" /></a>
+                </div>
+                <!--<h2>@Html.ActionLink("成绩记录", "EditScores", "Schedule", null, null)</h2>-->
+            </div>
+            <div class="col-md-3">
+                <h2></h2>
+            </div>
+            <div class="col-md-3">
+                <h2></h2>
+            </div>
+            <div class="col-md-3">
+                <h2></h2>
+            </div>
+        </div>
+    }
+    @if (role == "admin")
+{
+    <!--管理员功能-->
+    <div class="row">
+        <div class="col-md-3">
+            <div style="width:180px; height:180px; border:0">
+                <a href="@Url.Content("~/ShuttleManagement/Index")"><img src="~/imgaes/xiaocheweihu.png" alt="校车信息维护" /></a>
+            </div>
+            <!--<h2>@Html.ActionLink("校车信息更改", "Index", "ShuttleManagement", null, null)</h2>-->
+        </div>
+        <div class="col-md-3">
+            <div style="width:180px; height:180px; border:0">
+                <a href="@Url.Content("~/LibraryManagement/Index")"><img src="~/imgaes/tushuguanli.png" alt="图书馆管理" /></a>
+            </div>
+            <!--<h2>@Html.ActionLink("图书借还服务", "Index", "LibraryManagement", null, null)</h2>-->
+        </div>
+        <div class="col-md-3">
+            <h2></h2>
+        </div>
+        <div class="col-md-3">
+            <h2></h2>
+        </div>
+    </div>
+}
+</div>
+<script>
+    $(document).ready(function () {
+        $("#ios").click(function () {
+            alert("iOS版本正在开发中！");
+        });
+    });
+</script>

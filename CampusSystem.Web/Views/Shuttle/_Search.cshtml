@@ -1,0 +1,25 @@
+﻿@using CampusSystem.Data.Models;
+@model List<Shuttle>
+<table class="table table-striped">
+    <tr>
+        <td>时间</td>
+        <td>起点</td>
+        <td>终点</td>
+        <td>星期</td>
+    </tr>
+    @if (Model.Count == 0)
+    { 
+        <tr>
+            <td style="color:red">对不起，没有查找到结果。</td>
+        </tr>
+    }
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.time</td>
+            <td>@item.start_location</td>
+            <td>@item.end_location</td>
+            <td>@item.weekday</td>
+        </tr>
+    }
+</table>

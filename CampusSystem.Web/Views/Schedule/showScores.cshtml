@@ -1,0 +1,31 @@
+﻿@model List<CampusSystem.Web.Models.CourseScoreViewModel>
+
+@using (Ajax.BeginForm("SubmitScores", "Schedule", new { courseId = ViewBag.CourseId }, new AjaxOptions()
+{
+    HttpMethod = "POST",
+    OnSuccess = "success"
+}))
+{
+    <table class="table table-bordered">
+        <tr>
+            <td>学号</td>
+            <td>姓名</td>
+            <td>成绩</td>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.UserId</td>
+                <td>@item.UserName</td>
+                <td>@Html.TextBox("score", item.Score)</td>
+            </tr>
+        }
+    </table>
+    <button type="submit" id="submit" class="btn btn-primary">提交</button>
+}
+<script>
+    function success() {
+        alert("成绩修改成功！");
+    }
+</script>
+

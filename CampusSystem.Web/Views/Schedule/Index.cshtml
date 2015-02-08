@@ -1,0 +1,117 @@
+﻿@model string[,]
+
+@{
+    ViewBag.Title = "课程表查询";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.SubTitle = "课程表查询";
+    ViewBag.SubSubtitle = "校园信息即时交互系统";
+}
+
+<div class="container">
+    <table class="table table-bordered">
+        <tr>
+            <td></td>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+            <td>7</td>
+            <td>8</td>
+            <td>9</td>
+            <td>10</td>
+            <td>11</td>
+        </tr>
+        @for (int i = 0; i < 5; i++)
+        {
+            <tr>
+                @switch (i)
+                {
+                    case 0:
+                        <td>周一</td>
+                        for (int j = 0; j < 11; j++)
+                        {
+                            if (Model[i, j] == null)
+                            {
+                                <td></td>
+                            }
+                            else
+                            {
+                                <td>@Model[i, j]</td>
+                            }
+                        }
+                        break;
+                    case 1:
+                    <td>周二</td>
+                        for (int j = 0; j < 11; j++)
+                        {
+                            if (Model[i, j] == null)
+                            {
+                                <td></td>
+                            }
+                            else
+                            {
+                                <td>@Model[i, j]</td>
+                            }
+                        }
+                        break;
+                    case 2:
+                    <td>周三</td>
+                        for (int j = 0; j < 11; j++)
+                        {
+                            if (Model[i, j] == null)
+                            {
+                                <td></td>
+                            }
+                            else
+                            {
+                                <td>@Model[i, j]</td>
+                            }
+                        }
+                        break;
+                    case 3:
+                    <td>周四</td>
+                        for (int j = 0; j < 11; j++)
+                        {
+                            if (Model[i, j] == null)
+                            {
+                                <td></td>
+                            }
+                            else
+                            {
+                                <td>@Model[i, j]</td>
+                            }
+                        }
+                        break;
+                    case 4:
+                    <td>周五</td>
+                        for (int j = 0; j < 11; j++)
+                        {
+                            if (Model[i, j] == null)
+                            {
+                                <td></td>
+                            }
+                            else
+                            {
+                                <td>@Model[i, j]</td>
+                            }
+                        }
+                        break;
+                }
+            </tr>
+        }
+    </table>
+
+    <div id="showCourseInfo">
+        @Ajax.ActionLink("查看课程信息", "ShowCourseInfo", null, new AjaxOptions
+   {
+       UpdateTargetId = "showCourseInfo",
+       InsertionMode = InsertionMode.Replace,
+       HttpMethod = "GET"
+   }, new Dictionary<string, object>()
+   {
+       {"class", "btn btn-primary"}
+   })
+    </div>
+</div>

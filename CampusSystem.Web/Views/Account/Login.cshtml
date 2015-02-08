@@ -1,0 +1,155 @@
+﻿@model CampusSystem.Web.Models.UserModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>用户登录</title>
+    <link rel="stylesheet" href="~/Contents/css/bootstrap.min.css" />
+    <script src="~/Scripts/jquery-1.8.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0 0 0 0;
+            padding: 0 0 0 0;
+        }
+
+        form {
+            display: block;
+            margin-top: 0;
+        }
+
+        .bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url(/imgaes/bg.jpg) 0 0 no-repeat;
+            background-attachment: fixed;
+            -webkit-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+
+        .loginpanel {
+            position: fixed;
+            left: 35%;
+            height: 100%;
+            width: 65%;
+            box-shadow: 1px 3px 5px #999;
+            -webkit-box-shadow: 1px 3px 5px #999;
+            -moz-box-shadow: 1px 3px 5px #999;
+            background: rgb(255,255,255);
+            background: rgba(255,255,255,0.3);
+        }
+        .inner {
+            margin:170px 0 30px 45px;
+        }
+        .logo
+        {
+            width:490px;
+            height:90px;
+            margin-bottom:8px;
+            background-image:url(../../imgaes/title.png);
+        }
+        @@media screen and (max-width: 500px) {
+            .loginpanel {
+                left: 0;
+                width: 100%;
+            }
+
+            .form {
+                width: 100%;
+                height: 100%;
+            }
+            .inner {
+                margin: 50px 0 30px 45px;
+            }
+            .logo{
+                width:245px;
+                height:45px;
+                background-image:url(../../imgaes/titlesmall.png);
+            }
+        }
+        .signin-txt {
+            padding: 13px 15px;
+            font-size: 14px;
+            background-color: #ffffff;
+            border: 1px solid #cccccc;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+            -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+            -o-transition: border linear 0.2s, box-shadow linear 0.2s;
+            transition: border linear 0.2s, box-shadow linear 0.2s;
+            line-height: 20px;
+            color: #333333;
+            vertical-align: middle;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+            height: 20px;
+            width: 260px;
+            outline: none;
+        }
+
+        input, textarea, div {
+            resize: none;
+            outline: none;
+            font-size: inherit;
+            font-family: inherit;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg">
+        <div id="loginPanel" class="loginpanel">
+            <div class="inner">
+                <div style="display:inline-block;width:340px;float:left;">
+                    <div class="logo" >
+                        <!--<img alt="logo" src="~/imgaes/title.png" />-->
+                    </div>
+                    @using (Html.BeginForm())
+                    {
+                        <div style="margin-top:25px">
+                            @Html.TextBoxFor(m => m.UserId, new Dictionary<string, object> {
+                                                { "class", "signin-txt" },
+                                                { "placeholder", "用户名" },
+                                                {"style","height:40px"}
+                       })
+                        </div>
+                        <div style="margin-top:25px">
+                            @Html.PasswordFor(m => m.Password, new Dictionary<string, object> {
+                                                { "class", "signin-txt" },
+                                                { "placeholder", "密码" },
+                                                {"style","height:40px"}
+                       })
+                        </div>
+                        <div class="form-group" style="margin-top:25px">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <div class="checkbox">
+                                    <label>
+                                        @Html.CheckBoxFor(m => m.AutoLogin)
+                                        下次自动登录
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div style="margin-top:25px">
+                            <button type="submit" id="login" class="btn btn-primary">登录</button>
+                            <p style="color:red; font-family: 黑体; font-size:large">@ViewBag.ErrorMessage</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
